@@ -1,0 +1,163 @@
+/* Grundlayout */
+body {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 2em;
+    background: #fafbfc;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    color: #25324b;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-top: 1.4em;
+    margin-bottom: 0.7em;
+    color: #273146;
+    letter-spacing: 0.01em;
+}
+
+.powered {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 3em;
+    text-align: right;
+}
+
+/* Buttons */
+.main-btn, .trending-item, .ep-box, button {
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 1.13em;
+    background: #e9edf4;
+    padding: 1em 2em;
+    cursor: pointer;
+    box-shadow: 0 2px 10px #0001;
+    transition: background 0.14s, box-shadow 0.14s;
+}
+.main-btn:hover, .trending-item:hover, button:hover, .ep-box:hover {
+    background: #dae3f1;
+    box-shadow: 0 4px 16px #0001;
+}
+.main-btn {
+    padding: 1em 2em;
+    font-size: 1.5em;
+    margin: 1em 0.3em 1em 0;
+    width: 46%;
+    min-width: 160px;
+}
+
+.main-btn-row {
+    display: flex;
+    gap: 0.7em;
+    margin-bottom: 2em;
+    flex-wrap: wrap;
+}
+
+/* Trending-Listen */
+.trending { margin-top: 1.5em; }
+.trending-list { margin-bottom: 2em; }
+.trending-item {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background: #eef1f5;
+    border-radius: 8px;
+    padding: 0.6em 1em;
+    margin: 0.4em 0;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+.cover-img {
+    width: 48px; height: 70px; object-fit: cover;
+    border-radius: 6px; box-shadow: 0 2px 6px #0001; background: #ddd;
+}
+
+/* Sprachmenü */
+#lang-menu { position: absolute; top: 1.2em; right: 1.2em; z-index: 5; }
+#lang-btn { cursor: pointer; font-size: 2em; }
+#lang-dropdown { display: none; position: absolute; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 3px 10px #0001; }
+#lang-dropdown div { padding: 0.7em 1.3em; cursor: pointer; font-size: 1.1em; }
+#lang-dropdown div:hover { background: #f0f0f0; }
+
+/* Inputs und Selects */
+input[type="text"], select, input[type="number"], input[type="range"], textarea {
+    border-radius: 12px;
+    border: 1.5px solid #ccd6e6;
+    font-size: 1.13em;
+    padding: 0.7em 1.1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.9em;
+    box-shadow: 0 1px 8px #0001;
+    background: #f6f8fb;
+    transition: border 0.18s, box-shadow 0.18s;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="text"]:focus, select:focus, input[type="number"]:focus, textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 3px 14px #4a90e211;
+}
+
+/* Label-Style */
+label {
+    font-size: 1.05em;
+    font-weight: 500;
+    margin-bottom: 0.25em;
+    display: block;
+}
+
+/* Episoden-Stepper für Serien */
+.ep-box {
+    display: inline-block;
+    min-width: 2.1em;
+    min-height: 2.1em;
+    background: #f6f8fb;
+    margin: 0.14em 0.16em;
+    text-align: center;
+    border-radius: 12px;
+    border: 1.2px solid #d2dbe7;
+    font-size: 1em;
+    font-weight: 500;
+    box-shadow: 0 1px 3px #0001;
+    cursor: pointer;
+    transition: background 0.14s, border 0.16s;
+    vertical-align: middle;
+}
+.ep-box.selected {
+    background: #4a90e2;
+    color: #fff;
+    border: 1.7px solid #4a90e2;
+    box-shadow: 0 2px 7px #4a90e233;
+}
+
+/* Spinner (für Ladeanimation) */
+.spinner {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border: 3px solid #e1e8f5;
+    border-radius: 50%;
+    border-top: 3px solid #4a90e2;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+    margin-left: 0.7em;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body { padding: 0.8em; }
+    .main-btn-row { flex-direction: column; gap: 0.8em; }
+    .main-btn { width: 100%; min-width: unset;}
+}
+
+
+
+
+

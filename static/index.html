@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta/SEO managed via JS for maintainability -->
+    <script src="static/meta.js"></script>
+    <script>
+    setMeta({
+        title: "UntilNow – Individuelle Zusammenfassungen für Bücher, Serien & Filme (ohne Spoiler)",
+        description: "Mit UntilNow erhältst du individuelle, spoilerfreie Zusammenfassungen für Bücher, Serien und Filme. Wähle selbst von wo bis wo – perfekt, um schnell wieder einzusteigen.",
+        keywords: "Zusammenfassung, Buch Zusammenfassung, Serie Zusammenfassung, Film Zusammenfassung, spoilerfrei, individuell, Kapitel, Szene, Seite, bis wohin, Without Spoilers, UntilNow",
+        ogTitle: "UntilNow – Individuelle Zusammenfassungen ohne Spoiler",
+        ogDescription: "Individuelle Zusammenfassungen für Bücher, Serien & Filme – von dir bestimmt, ohne Spoiler. Schnell, kostenlos, für alle Medien.",
+        ogUrl: "https://untilnow.xyz/",
+        ogImage: "https://untilnow.xyz/untilnow-logo.png",
+        twitterTitle: "UntilNow – Individuelle Zusammenfassungen für Bücher, Serien & Filme",
+        twitterDescription: "Bestimme selbst, von wo bis wo zusammengefasst wird – ohne Spoiler!",
+        canonical: "https://untilnow.xyz/",
+        hreflang: {
+            de: "https://untilnow.xyz/",
+            en: "https://untilnow.xyz/en/",
+            es: "https://untilnow.xyz/es/",
+            fr: "https://untilnow.xyz/fr/"
+        }
+    });
+    </script>
+    <link rel="icon" href="faviUntilNow.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Dein vorhandenes Style bleibt unverändert */
+        body { 
+            max-width: 540px; 
+            margin: 0 auto; 
+            padding: 2em; 
+            background: #fafbfc; 
+            position: relative;
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 0em;
+            min-height: 66px;
+        }
+        #lang-menu {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 5;
+        }
+        .untilnow-logo {
+            max-height: 50px;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 2px 12px #0005);
+        }
+        .main-btn-row { 
+            display: flex; 
+            flex-direction: row;
+            gap: 0.7em; 
+            margin-bottom: 2em; 
+            flex-wrap: wrap;
+        }
+        .main-btn { 
+            padding: 1em 2em; 
+            font-size: 1.5em; 
+            border-radius: 12px; 
+            margin: 0; 
+            cursor: pointer; 
+            border: none; 
+            width: 46%; 
+            min-width: 140px; 
+            box-sizing: border-box;
+            background: #eef1f5;
+            transition: background 0.16s, box-shadow 0.16s;
+            box-shadow: 0 2px 10px #0001;
+        }
+        .main-btn:hover {
+            background: #d9e6f6;
+            box-shadow: 0 4px 18px #2266bb22;
+        }
+        .trending { margin-top: 1.5em; }
+        .trending-list { margin-bottom: 2em; }
+        .trending-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 1em; 
+            background: #eef1f5; 
+            border-radius: 8px; 
+            padding: 0.6em 1em; 
+            margin: 0.4em 0; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 1em; 
+        }
+        .cover-img { 
+            width: 48px; 
+            height: 70px; 
+            object-fit: cover; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 6px #0001; 
+            background: #ddd; 
+        }
+        .powered { 
+            font-size: 0.9em; 
+            color: #aaa; 
+            margin-top: 3em; 
+            text-align: right; 
+        }
+        #lang-modal-bg {
+            display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.25); z-index:99; justify-content:center; align-items:center;
+        }
+        #lang-dropdown {
+            display: none; 
+            position:relative; 
+            min-width:220px; 
+            background: white; 
+            border: 1px solid #ddd; 
+            border-radius: 13px; 
+            box-shadow: 0 8px 24px #0001;
+            padding:0.7em 0; 
+            font-size:1.2em;
+            animation:pop 0.14s cubic-bezier(.46,.53,.55,.96);
+        }
+        #lang-dropdown div { 
+            padding: 0.7em 1.7em; 
+            cursor: pointer;
+        }
+        #lang-dropdown div:hover { background: #eef3fa; }
+        @keyframes pop { 
+            0% { transform:scale(0.6); opacity:0.4 } 
+            100% { transform:scale(1); opacity:1; } 
+        }
+        .affiliate-footer-row {
+            display: flex;
+            gap: 0.8em;
+            margin-top: 2.5em;
+            margin-bottom: 0.1em;
+            width: 100%;
+        }
+        .affiliate-card {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #e5eaf4;
+            border-radius: 13px;
+            padding: 1.1em 0.5em 1.2em 0.5em;
+            text-align: center;
+            box-shadow: 0 2px 10px #2266bb12;
+            border: 1px solid #dbe3ec;
+            cursor: pointer;
+            transition: box-shadow 0.18s, background 0.18s;
+            min-width: 0;
+        }
+        .affiliate-card:hover { 
+            background: #d0e4fa; 
+            box-shadow: 0 4px 20px #2266bb24; 
+        }
+        .affiliate-label { 
+            font-size: 1.08em; 
+            font-weight: bold; 
+            margin-top: 0.5em;
+            color: #13356a;
+        }
+        .prime-logo {
+            height: 2em;
+            margin-bottom: 0.3em;
+        }
+        .amazon-logo {
+            height: 2em;
+            margin-bottom: 0.3em;
+        }
+        .thrift-logo {
+            height: 2.1em;
+            margin-bottom: 0.3em;
+        }
+        /* --- MOBILE: Buttons bleiben nebeneinander, werden kompakter --- */
+        @media (max-width: 600px) {
+            body { padding: 1em; }
+            .main-btn-row { 
+                flex-direction: row !important;
+                gap: 0.5em !important;
+                margin-bottom: 1em !important;
+                flex-wrap: nowrap !important;
+                justify-content: center;
+            }
+            .main-btn {
+                width: 46% !important;
+                min-width: 80px !important;
+                font-size: 1.12em !important;
+                padding: 0.7em 0.2em !important;
+                margin: 0 !important;
+            }
+            .affiliate-footer-row { flex-direction: column; gap: 0.9em; }
+            .untilnow-logo { max-width: 95vw; max-height: 48px; }
+            .header-row { min-height: 48px; }
+        }
+        @media (max-width: 420px) {
+            .main-btn {
+                font-size: 1em !important;
+                min-width: 50px !important;
+                padding: 0.6em 0.1em !important;
+            }
+            .main-btn-row { gap: 0.2em !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-row">
+        <img src="untilnow-logo.png" alt="UntilNow Logo – Spoilerfreie Zusammenfassungen" class="untilnow-logo">
+        <div id="lang-menu">
+            <span id="lang-btn">🌐</span>
+        </div>
+    </div>
+    <div id="lang-modal-bg">
+        <div id="lang-dropdown">
+            <div data-lang="de">🇩🇪 Deutsch</div>
+            <div data-lang="en">🇬🇧 English</div>
+            <div data-lang="es">🇪🇸 Español</div>
+            <div data-lang="fr">🇫🇷 Français</div>
+        </div>
+    </div>
+
+    <h1 id="mainTitle">📚🎬 Was suchst du?</h1>
+    <div class="main-btn-row">
+        <button class="main-btn" id="movieBtn">🎬 Film/Serie</button>
+        <button class="main-btn" id="bookBtn">📖 Buch</button>
+    </div>
+
+    <div class="trending">
+        <h2 id="trendingTitle">📈 Aktuell beliebt</h2>
+        <div>
+            <div id="videosLabel" style="font-weight:bold; margin-bottom:0.4em;"></div>
+            <div id="trendingVideos" class="trending-list"></div>
+        </div>
+        <div>
+            <div id="booksLabel" style="font-weight:bold; margin-bottom:0.4em;"></div>
+            <div id="trendingBooks" class="trending-list"></div>
+        </div>
+    </div>
+
+    <div class="powered">📌 Powered by Gemini, TMDB & Google Books</div>
+
+    <!-- Affiliate Footer -->
+    <div class="affiliate-footer-row">
+        <div class="affiliate-card" onclick="window.open('https://www.amazon.de/prime?tag=DEIN_AFFILIATE_ID', '_blank')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Amazon_Prime_Logo.svg" class="prime-logo" alt="Prime Video – Werbung">
+            <div class="affiliate-label" id="primeLabel">Prime</div>
+        </div>
+        <div class="affiliate-card" onclick="window.open('https://www.amazon.de/?tag=DEIN_AFFILIATE_ID', '_blank')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" class="amazon-logo" alt="Amazon – Werbung">
+            <div class="affiliate-label" id="amazonLabel">Amazon</div>
+        </div>
+        <div class="affiliate-card" onclick="window.open('https://www.thriftbooks.com/?utm_source=affiliate&utm_medium=affiliate&utm_campaign=DEIN_AFFILIATE_ID', '_blank')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Logo_of_Thriftbooks.svg" class="thrift-logo" alt="ThriftBooks – Werbung">
+            <div class="affiliate-label" id="thriftLabel">ThriftBooks</div>
+        </div>
+    </div>
+
+    <script>
+        // Übersetzungen
+        const texts = {
+            title: {
+                de: "📚🎬 Was suchst du?",
+                en: "📚🎬 What are you looking for?",
+                es: "📚🎬 ¿Qué buscas?",
+                fr: "📚🎬 Que cherchez-vous ?"
+            },
+            book: {
+                de: "📖 Buch",
+                en: "📖 Book",
+                es: "📖 Libro",
+                fr: "📖 Livre"
+            },
+            movie: {
+                de: "🎬 Film/Serie",
+                en: "🎬 Movie/Series",
+                es: "🎬 Película/Serie",
+                fr: "🎬 Film/Série"
+            },
+            trending: {
+                de: "📈 Aktuell beliebt",
+                en: "📈 Trending Now",
+                es: "📈 Populares ahora",
+                fr: "📈 Tendance actuelle"
+            },
+            books: {
+                de: "📚 Bücher",
+                en: "📚 Books",
+                es: "📚 Libros",
+                fr: "📚 Livres"
+            },
+            videos: {
+                de: "🎬 Filme & Serien",
+                en: "🎬 Movies & Series",
+                es: "🎬 Películas y series",
+                fr: "🎬 Films et séries"
+            }
+        };
+
+        // Sprache aus Session oder Default
+        let currentLang = sessionStorage.getItem('lang') || "de";
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            sessionStorage.setItem('lang', lang);
+            document.getElementById("mainTitle").innerText = texts.title[lang];
+            document.getElementById("bookBtn").innerText = texts.book[lang];
+            document.getElementById("movieBtn").innerText = texts.movie[lang];
+            document.getElementById("trendingTitle").innerText = texts.trending[lang];
+            document.getElementById("booksLabel").innerText = texts.books[lang];
+            document.getElementById("videosLabel").innerText = texts.videos[lang];
+            fetchTrending();
+        }
+
+        // Sprachmenü als mittiges Modal
+        document.getElementById('lang-btn').onclick = () => {
+            let bg = document.getElementById('lang-modal-bg');
+            let dd = document.getElementById('lang-dropdown');
+            bg.style.display = 'flex';
+            dd.style.display = 'block';
+        };
+        document.querySelectorAll('#lang-dropdown div').forEach((el) => {
+            el.onclick = () => {
+                setLanguage(el.dataset.lang);
+                document.getElementById('lang-modal-bg').style.display = 'none';
+                document.getElementById('lang-dropdown').style.display = 'none';
+            }
+        });
+        document.getElementById('lang-modal-bg').onclick = function(e){
+            if (e.target === this) { 
+                this.style.display = 'none'; 
+                document.getElementById('lang-dropdown').style.display = 'none'; 
+            }
+        };
+
+        // Trending laden & mit Coverbildern
+        function fetchTrending() {
+            // Videos mit TMDB-Cover (jetzt zuerst)
+            fetch(`/api/get_trending_movies_and_series?lang=${currentLang}`)
+                .then(r => r.json()).then(async videos => {
+                    let el = document.getElementById("trendingVideos");
+                    el.innerHTML = "";
+                    for (let title of videos) {
+                        let img = '';
+                        try {
+                            let r = await fetch(`/api/search_media?query=${encodeURIComponent(title)}&language=${currentLang}`);
+                            let res = await r.json();
+                            let item = res[0];
+                            if (item && item.poster_path) {
+                                img = `<img class="cover-img" src="https://image.tmdb.org/t/p/w200${item.poster_path}">`;
+                            } else {
+                                img = `<div class="cover-img" style="display:inline-flex;align-items:center;justify-content:center;color:#ccc;">🎬</div>`;
+                            }
+                        } catch (e) {
+                            img = `<div class="cover-img" style="display:inline-flex;align-items:center;justify-content:center;color:#ccc;">🎬</div>`;
+                        }
+                        let btn = document.createElement("button");
+                        btn.className = "trending-item";
+                        btn.innerHTML = img + `<span>${title}</span>`;
+                        btn.onclick = () => selectTrending("video", title);
+                        el.appendChild(btn);
+                    }
+                });
+            // Bücher (jetzt unten)
+            fetch(`/api/get_trending_books?lang=${currentLang}`)
+                .then(r => r.json()).then(books => {
+                    let el = document.getElementById("trendingBooks");
+                    el.innerHTML = "";
+                    books.forEach(book => {
+                        let btn = document.createElement("button");
+                        btn.className = "trending-item";
+                        btn.innerHTML = `<span>🔹</span><span>${book}</span>`;
+                        btn.onclick = () => selectTrending("book", book);
+                        el.appendChild(btn);
+                    });
+                });
+        }
+
+        function selectTrending(type, query) {
+            sessionStorage.setItem("selected_type", type);
+            sessionStorage.setItem("selected_query", query);
+            sessionStorage.setItem("lang", currentLang);
+            if (type === "book") {
+                window.location.href = "book.html";
+            } else {
+                window.location.href = "video.html";
+            }
+        }
+
+        document.getElementById("movieBtn").onclick = () => {
+            sessionStorage.setItem("selected_type", "video");
+            sessionStorage.setItem("selected_query", "");
+            sessionStorage.setItem("lang", currentLang);
+            window.location.href = "video.html";
+        };
+        document.getElementById("bookBtn").onclick = () => {
+            sessionStorage.setItem("selected_type", "book");
+            sessionStorage.setItem("selected_query", "");
+            sessionStorage.setItem("lang", currentLang);
+            window.location.href = "book.html";
+        };
+
+        setLanguage(currentLang);
+    </script>
+</body>
+</html>
